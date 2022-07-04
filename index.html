@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+			crossorigin="anonymous"
+		/>
+		<style></style>
+	</head>
+	<body>
+		<div class="input m-4">
+			<form id="form" class="col-12 col-md-4 mx-auto">
+				<div class="row mb-3">
+					<label for="colFormLabel" class="col-sm-3 col-form-label"
+						>Start Value:</label
+					>
+					<div class="col-sm-6">
+						<input
+							type="number"
+							required
+							class="form-control"
+							id="start-first-14"
+							placeholder="First 14 digit"
+						/>
+					</div>
+					<div class="col-sm-3">
+						<input
+							type="number"
+							required
+							class="form-control number"
+							id="start-last-4"
+							placeholder="Last 4 digit"
+						/>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label for="colFormLabel1" class="col-sm-3 col-form-label"
+						>End Value:</label
+					>
+					<div class="col-sm-6">
+						<input
+							type="number"
+							disabled
+							class="form-control number"
+							id="end-first-14"
+							placeholder="First 14 digit"
+						/>
+					</div>
+					<div class="col-sm-3">
+						<input
+							required
+							type="number"
+							class="form-control number"
+							id="end-last-4"
+							placeholder="Last 4 digit"
+						/>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<input
+						class="col-sm-6 mx-auto"
+						type="submit"
+						value="Generate Number"
+					/>
+				</div>
+				<div class="col-12 col-md-4 mx-auto">
+					<h4>Number:</h4>
+					<div id="result"></div>
+				</div>
+			</form>
+		</div>
+		<div id="output"></div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			const first14 = document.getElementById("start-first-14");
+			const last14 = document.getElementById("end-first-14");
+
+			const firstEnd4 = document.getElementById("start-last-4");
+			const lastEnd4 = document.getElementById("end-last-4");
+
+			const result = document.getElementById("result");
+
+			first14.addEventListener("input", () => {
+				last14.value = first14.value;
+			});
+
+			document.getElementById("form").addEventListener("submit", (e) => {
+				e.preventDefault();
+				result.innerText = "";
+				for (let i = firstEnd4.value; i <= lastEnd4.value; i++) {
+					var p = document.createElement("p");
+					var len = i.toString().length;
+					if (len === 1) {
+						p.innerText = `${last14.value}000${i}`;
+					} else if (len === 2) {
+						p.innerText = `${last14.value}00${i}`;
+					} else if (len === 3) {
+						p.innerText = `${last14.value}0${i}`;
+					} else if (len === 4) {
+						p.innerText = `${last14.value}${i}`;
+					} else {
+						window.alert("Wrong Input");
+						break;
+					}
+
+					result.appendChild(p);
+				}
+
+				console.log("clicked");
+			});
+		</script>
+	</body>
+</html>
